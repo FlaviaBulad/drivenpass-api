@@ -1,4 +1,7 @@
-node_modules
+node_modules/
+/docs
 .env
 .env.dev
 .wakatime-project
+.prettier*
+.eslint*
