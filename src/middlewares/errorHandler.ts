@@ -1,14 +1,16 @@
 import { NextFunction, Request, Response } from 'express';
 
 const ERRORS = {
+  bad_request: 400,
   unauthorized: 401,
-  conflict: 409,
+  forbidden: 403,
   not_found: 404,
-  bad_request: 400
+  conflict: 409,
+  unprocessable_entity: 422
 };
 
 export default function errorHandler(
-  err,
+  err: Error | any,
   req: Request,
   res: Response,
   next: NextFunction
