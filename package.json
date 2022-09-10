@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Mobile password manager app",
   "main": ".src/index.js",
-  "engines":{
+  "engines": {
     "node": "16.x",
     "npm": "8.x"
   },
@@ -48,10 +48,12 @@
   },
   "dependencies": {
     "@prisma/client": "^4.3.1",
+    "@types/bcryptjs": "^2.4.2",
     "acorn": "^8.8.0",
     "acorn-walk": "^8.2.0",
     "arg": "^4.1.3",
     "bcrypt": "^5.0.1",
+    "bcryptjs": "^2.4.3",
     "chalk": "^5.0.1",
     "cors": "^2.8.5",
     "create-require": "^1.1.1",

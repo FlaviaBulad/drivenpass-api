@@ -10,7 +10,7 @@ const ERRORS = {
 };
 
 export default function errorHandler(
-  err: Error | any,
+  err: { type: string; message: string },
   req: Request,
   res: Response,
   next: NextFunction
