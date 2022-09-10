@@ -7,9 +7,65 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model users {
-  id       Int    @id @default(autoincrement())
-  email    String @unique
-  password String
+model Users {
+  id          Int           @id @default(autoincrement())
+  email       String        @unique
+  password    String
+  cards       Cards[]
+  credentials Credentials[]
+  safeNotes   SafeNotes[]
+  wifi        Wifi[]
+  createdAt   DateTime      @default(now())
+}
+
+model Cards {
+  id             Int       @id @default(autoincrement())
+  user           Users     @relation(fields: [userId], references: [id])
+  userId         Int
+  cardTag        String
+  name           String
+  number         Int
+  cvc            Int
+  expirationDate String
+  password       String
+  type           CardTypes
+  isVirtual      Boolean
+  createdAt      DateTime  @default(now())
+}
+
+model Credentials {
+  id        Int      @id @default(autoincrement())
+  user      Users    @relation(fields: [userId], references: [id])
+  userId    Int
+  credentialsTag       String
+  url       String
+  username  String
+  password  String
   createdAt DateTime @default(now())
+}
+
+model SafeNotes {
+  id           Int      @id @default(autoincrement())
+  user         Users    @relation(fields: [userId], references: [id])
+  userId       Int
+  safeNotesTag String
+  title        String
+  text         String
+  createdAt    DateTime @default(now())
+}
+
+model Wifi {
+  id        Int      @id @default(autoincrement())
+  user      Users    @relation(fields: [userId], references: [id])
+  userId    Int
+  wifiTag   String
+  name      String
+  password  String
+  createdAt DateTime @default(now())
+}
+
+enum CardTypes {
+  credit
+  debit
+  hybrid
 }
