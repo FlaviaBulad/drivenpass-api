@@ -23,7 +23,7 @@ export async function createSafeNote(
   await safeNoteRepository.createSafeNote(userId, safeNotesData);
 }
 
-export async function ggetAllSafeNotes(userId: number) {
+export async function getAllSafeNotes(userId: number) {
   const safeNoteList = await safeNoteRepository.getAllSafeNotesByUserId(userId);
   return safeNoteList;
 }

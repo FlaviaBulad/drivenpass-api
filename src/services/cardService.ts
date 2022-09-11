@@ -23,22 +23,10 @@ export async function createCard(userId: number, cardData: CardData) {
   await cardRepository.createCard(userId, card);
 }
 
-function decryptCardData(cardList: CardData[]) {
-  const decryptedInfo = cardList.map((card) => ({
-    ...cardList,
-    password: encryptUtils.decryptData(card.password),
-    securityCode: encryptUtils.decryptData(card.securityCode)
-  }));
-  return decryptedInfo;
-}
-
 export async function getAllCards(userId: number) {
-  const cardsList: CardData[] = await cardRepository.getAllCardsByUserId(
-    userId
-  );
+  const cardsList = await cardRepository.getAllCardsByUserId(userId);
 
-  const decryptedCards = decryptCardData(cardsList);
-  return decryptedCards;
+  return cardsList;
 }
 
 export async function getCardById(userId: number, cardId: number) {
@@ -52,6 +40,6 @@ export async function getCardById(userId: number, cardId: number) {
   return card;
 }
 
-export async function deleteCard(cardId: number, userId: number) {
+export async function deleteCard(cardId: number) {
   await cardRepository.deleteCardById(cardId);
 }

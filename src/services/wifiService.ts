@@ -20,7 +20,7 @@ export async function createWifi(userId: number, wifiData: WifiData) {
   await wifiRepository.createWifi(userId, wifiData);
 }
 
-export async function ggetAllWifis(userId: number) {
+export async function getAllWifis(userId: number) {
   const wifiList = await wifiRepository.getAllWifisByUserId(userId);
   return wifiList;
 }

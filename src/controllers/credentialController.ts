@@ -5,9 +5,9 @@ import * as encryptUtils from '../utils/encryptUtils';
 
 export async function createCredential(req: Request, res: Response) {
   const credentialData: CredentialData = req.body;
-  const { user } = res.locals;
+  const { userId } = res.locals;
   const credential = await credentialService.createCredential(
-    user.userId,
+    userId,
     credentialData
   );
 

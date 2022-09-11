@@ -13,7 +13,7 @@ export async function createSafeNote(req: Request, res: Response) {
 
 export async function getAllSafeNotes(req: Request, res: Response) {
   const { userId } = res.locals;
-  const safeNoteList = await safeNoteService.ggetAllSafeNotes(userId);
+  const safeNoteList = await safeNoteService.getAllSafeNotes(userId);
 
   for (let i = 0; i < safeNoteList.length; i++) {
     safeNoteList[i].note = encryptUtils.decryptData(safeNoteList[i].note);

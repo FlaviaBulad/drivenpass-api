@@ -13,7 +13,7 @@ export async function createWifi(req: Request, res: Response) {
 
 export async function getAllwifis(req: Request, res: Response) {
   const { userId } = res.locals;
-  const wifiList = await wifiService.ggetAllWifis(userId);
+  const wifiList = await wifiService.getAllWifis(userId);
 
   for (let i = 0; i < wifiList.length; i++) {
     wifiList[i].password = encryptUtils.decryptData(wifiList[i].password);
