@@ -41,11 +41,11 @@ export async function getCredentialById(req: Request, res: Response) {
 }
 
 export async function deleteCredential(req: Request, res: Response) {
-  const id = Number(req.params.id);
+  const credentialId = Number(req.params);
   const { userId } = res.locals;
 
-  await credentialService.getCredentialById(userId, id);
-  await credentialService.deleteCredential(id);
+  await credentialService.getCredentialById(userId, credentialId);
+  await credentialService.deleteCredential(credentialId);
 
-  res.status(201).send(`Wifi with id ${id} has been removed!`);
+  res.status(201).send('Credential deleted');
 }
