@@ -8,23 +8,23 @@ const safeNotesRouter = Router();
 
 safeNotesRouter.post(
   '/safeNotes/',
-  validateToken,
+  validateToken(),
   validateSchema(safeNoteSchema),
   safeNoteController.createSafeNote
 );
 safeNotesRouter.get(
   '/safeNotes/',
-  validateToken,
+  validateToken(),
   safeNoteController.getAllSafeNotes
 );
 safeNotesRouter.get(
   '/safeNotes/:id',
-  validateToken,
+  validateToken(),
   safeNoteController.getSafeNoteById
 );
 safeNotesRouter.delete(
   '/safeNotes/:id',
-  validateToken,
+  validateToken(),
   safeNoteController.deletesafeNote
 );
 

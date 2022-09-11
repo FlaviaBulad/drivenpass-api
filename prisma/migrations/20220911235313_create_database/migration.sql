@@ -1,21 +1,11 @@
-/*
-  Warnings:
-
-  - You are about to drop the `users` table. If the table is not empty, all the data it contains will be lost.
-
-*/
 -- CreateEnum
 CREATE TYPE "CardTypes" AS ENUM ('credit', 'debit', 'hybrid');
-
--- DropTable
-DROP TABLE "users";
 
 -- CreateTable
 CREATE TABLE "Users" (
     "id" SERIAL NOT NULL,
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Users_pkey" PRIMARY KEY ("id")
 );
@@ -23,16 +13,15 @@ CREATE TABLE "Users" (
 -- CreateTable
 CREATE TABLE "Cards" (
     "id" SERIAL NOT NULL,
-    "userId" INTEGER NOT NULL,
-    "tag" TEXT NOT NULL,
-    "name" TEXT NOT NULL,
-    "number" INTEGER NOT NULL,
-    "cvc" INTEGER NOT NULL,
+    "title" TEXT NOT NULL,
+    "cardHolderName" TEXT NOT NULL,
+    "number" TEXT NOT NULL,
+    "securityCode" TEXT NOT NULL,
     "expirationDate" TEXT NOT NULL,
     "password" TEXT NOT NULL,
     "type" "CardTypes" NOT NULL,
     "isVirtual" BOOLEAN NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "userId" INTEGER NOT NULL,
 
     CONSTRAINT "Cards_pkey" PRIMARY KEY ("id")
 );
@@ -40,12 +29,11 @@ CREATE TABLE "Cards" (
 -- CreateTable
 CREATE TABLE "Credentials" (
     "id" SERIAL NOT NULL,
-    "userId" INTEGER NOT NULL,
-    "tag" TEXT NOT NULL,
+    "title" TEXT NOT NULL,
     "url" TEXT NOT NULL,
     "username" TEXT NOT NULL,
     "password" TEXT NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "userId" INTEGER NOT NULL,
 
     CONSTRAINT "Credentials_pkey" PRIMARY KEY ("id")
 );
@@ -53,11 +41,9 @@ CREATE TABLE "Credentials" (
 -- CreateTable
 CREATE TABLE "SafeNotes" (
     "id" SERIAL NOT NULL,
+    "title" VARCHAR(50) NOT NULL,
+    "note" VARCHAR(1000) NOT NULL,
     "userId" INTEGER NOT NULL,
-    "safeNotesTag" TEXT NOT NULL,
-    "title" TEXT NOT NULL,
-    "text" TEXT NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "SafeNotes_pkey" PRIMARY KEY ("id")
 );
@@ -65,17 +51,28 @@ CREATE TABLE "SafeNotes" (
 -- CreateTable
 CREATE TABLE "Wifi" (
     "id" SERIAL NOT NULL,
-    "userId" INTEGER NOT NULL,
-    "wifiTag" TEXT NOT NULL,
-    "name" TEXT NOT NULL,
+    "title" TEXT NOT NULL,
+    "networkName" TEXT NOT NULL,
     "password" TEXT NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "userId" INTEGER NOT NULL,
 
     CONSTRAINT "Wifi_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Users_email_key" ON "Users"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Cards_title_userId_key" ON "Cards"("title", "userId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Credentials_title_userId_key" ON "Credentials"("title", "userId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "SafeNotes_title_userId_key" ON "SafeNotes"("title", "userId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Wifi_title_userId_key" ON "Wifi"("title", "userId");
 
 -- AddForeignKey
 ALTER TABLE "Cards" ADD CONSTRAINT "Cards_userId_fkey" FOREIGN KEY ("userId") REFERENCES "Users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

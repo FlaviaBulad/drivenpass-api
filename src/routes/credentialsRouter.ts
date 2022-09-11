@@ -8,23 +8,23 @@ const credentialsRouter = Router();
 
 credentialsRouter.post(
   '/credentials/',
-  validateToken,
+  validateToken(),
   validateSchema(credentialSchema),
   credentialController.createCredential
 );
 credentialsRouter.get(
   '/credentials/',
-  validateToken,
+  validateToken(),
   credentialController.getAllCredentials
 );
 credentialsRouter.get(
   '/credentials/:id',
-  validateToken,
+  validateToken(),
   credentialController.getCredentialById
 );
 credentialsRouter.delete(
   '/credentials/:id',
-  validateToken,
+  validateToken(),
   credentialController.deleteCredential
 );
 
