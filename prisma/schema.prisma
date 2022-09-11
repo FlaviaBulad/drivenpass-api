@@ -15,53 +15,55 @@ model Users {
   credentials Credentials[]
   safeNotes   SafeNotes[]
   wifi        Wifi[]
-  createdAt   DateTime      @default(now())
 }
 
 model Cards {
-  id             Int       @id @default(autoincrement())
-  user           Users     @relation(fields: [userId], references: [id])
-  userId         Int
-  cardTag        String
-  name           String
+  id Int @id @default(autoincrement())
+  title          String
+  cardHolderName String
   number         Int
-  cvc            Int
+  securityCode   String
   expirationDate String
   password       String
   type           CardTypes
   isVirtual      Boolean
-  createdAt      DateTime  @default(now())
+  user           Users     @relation(fields: [userId], references: [id])
+  userId         Int
+
+   @@unique([title, userId])
 }
 
 model Credentials {
-  id        Int      @id @default(autoincrement())
-  user      Users    @relation(fields: [userId], references: [id])
-  userId    Int
-  credentialsTag       String
-  url       String
-  username  String
-  password  String
-  createdAt DateTime @default(now())
+  id Int @id @default(autoincrement())
+  title    String
+  url      String
+  username String
+  password String
+  user     Users  @relation(fields: [userId], references: [id])
+  userId   Int
+
+   @@unique([title, userId])
 }
 
 model SafeNotes {
-  id           Int      @id @default(autoincrement())
-  user         Users    @relation(fields: [userId], references: [id])
-  userId       Int
-  safeNotesTag String
-  title        String
-  text         String
-  createdAt    DateTime @default(now())
+  id Int @id @default(autoincrement())
+  title  String @db.VarChar(50)
+  note   String @db.VarChar(1000)
+  user   Users  @relation(fields: [userId], references: [id])
+  userId Int
+
+   @@unique([title, userId])
 }
 
 model Wifi {
-  id        Int      @id @default(autoincrement())
-  user      Users    @relation(fields: [userId], references: [id])
-  userId    Int
-  wifiTag   String
-  name      String
-  password  String
-  createdAt DateTime @default(now())
+  id Int @id @default(autoincrement())
+  title       String
+  networkName String
+  password    String
+  user        Users  @relation(fields: [userId], references: [id])
+  userId      Int
+
+   @@unique([title, userId])
 }
 
 enum CardTypes {
