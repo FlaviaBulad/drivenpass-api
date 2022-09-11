@@ -24,7 +24,7 @@ export async function getAllCredentials(req: Request, res: Response) {
     );
   }
 
-  res.status(201).send(credentialsList);
+  res.status(200).send(credentialsList);
 }
 
 export async function getCredentialById(req: Request, res: Response) {
@@ -37,7 +37,7 @@ export async function getCredentialById(req: Request, res: Response) {
   );
   credentialList.password = encryptUtils.decryptData(credentialList.password);
 
-  res.status(201).send(credentialList);
+  res.status(200).send(credentialList);
 }
 
 export async function deleteCredential(req: Request, res: Response) {
@@ -47,5 +47,5 @@ export async function deleteCredential(req: Request, res: Response) {
   await credentialService.getCredentialById(userId, credentialId);
   await credentialService.deleteCredential(credentialId);
 
-  res.status(201).send('Credential deleted');
+  res.status(200).send('Credential deleted');
 }

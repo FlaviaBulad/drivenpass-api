@@ -29,7 +29,7 @@ export async function getWifiById(req: Request, res: Response) {
   const wifiList = await wifiService.getWifiById(userId, wifiId);
   wifiList.password = encryptUtils.decryptData(wifiList.password);
 
-  res.status(201).send(wifiList);
+  res.status(200).send(wifiList);
 }
 
 export async function deleteWifi(req: Request, res: Response) {
@@ -39,5 +39,5 @@ export async function deleteWifi(req: Request, res: Response) {
   await wifiService.getWifiById(userId, wifiId);
   await wifiService.deleteWifi(wifiId);
 
-  res.status(201).send('wifi info deleted');
+  res.status(200).send('wifi info deleted');
 }

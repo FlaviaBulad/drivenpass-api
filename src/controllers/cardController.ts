@@ -33,7 +33,7 @@ export async function getCardById(req: Request, res: Response) {
 
   const cardList = await cardService.getCardById(userId, cardId);
 
-  res.status(201).send(cardList);
+  res.status(200).send(cardList);
 }
 
 export async function deleteCard(req: Request, res: Response) {

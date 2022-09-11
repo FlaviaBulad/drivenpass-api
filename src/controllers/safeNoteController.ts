@@ -19,7 +19,7 @@ export async function getAllSafeNotes(req: Request, res: Response) {
     safeNoteList[i].note = encryptUtils.decryptData(safeNoteList[i].note);
   }
 
-  res.status(201).send(safeNoteList);
+  res.status(200).send(safeNoteList);
 }
 
 export async function getSafeNoteById(req: Request, res: Response) {
@@ -32,7 +32,7 @@ export async function getSafeNoteById(req: Request, res: Response) {
   );
   safeNoteList.note = encryptUtils.decryptData(safeNoteList.note);
 
-  res.status(201).send(safeNoteList);
+  res.status(200).send(safeNoteList);
 }
 
 export async function deletesafeNote(req: Request, res: Response) {
@@ -42,5 +42,5 @@ export async function deletesafeNote(req: Request, res: Response) {
   await safeNoteService.getSafeNoteById(userId, safeNoteId);
   await safeNoteService.deleteSafeNote(safeNoteId);
 
-  res.status(201).send('Note deleted');
+  res.status(200).send('Note deleted');
 }
