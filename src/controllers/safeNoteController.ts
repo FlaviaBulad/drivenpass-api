@@ -23,24 +23,21 @@ export async function getAllSafeNotes(req: Request, res: Response) {
 }
 
 export async function getSafeNoteById(req: Request, res: Response) {
-  const safeNoteId = Number(req.params);
+  const id = Number(req.params.id);
   const { userId } = res.locals;
 
-  const safeNoteList = await safeNoteService.getSafeNoteById(
-    userId,
-    safeNoteId
-  );
+  const safeNoteList = await safeNoteService.getSafeNoteById(userId, id);
   safeNoteList.note = encryptUtils.decryptData(safeNoteList.note);
 
   res.status(200).send(safeNoteList);
 }
 
 export async function deletesafeNote(req: Request, res: Response) {
-  const safeNoteId = Number(req.params);
+  const id = Number(req.params.id);
   const { userId } = res.locals;
 
-  await safeNoteService.getSafeNoteById(userId, safeNoteId);
-  await safeNoteService.deleteSafeNote(safeNoteId);
+  await safeNoteService.getSafeNoteById(userId, id);
+  await safeNoteService.deleteSafeNote(id);
 
   res.status(200).send('Note deleted');
 }

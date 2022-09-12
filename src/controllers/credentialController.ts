@@ -28,24 +28,21 @@ export async function getAllCredentials(req: Request, res: Response) {
 }
 
 export async function getCredentialById(req: Request, res: Response) {
-  const credentialId = Number(req.params);
+  const id = Number(req.params.id);
   const { userId } = res.locals;
 
-  const credentialList = await credentialService.getCredentialById(
-    userId,
-    credentialId
-  );
+  const credentialList = await credentialService.getCredentialById(userId, id);
   credentialList.password = encryptUtils.decryptData(credentialList.password);
 
   res.status(200).send(credentialList);
 }
 
 export async function deleteCredential(req: Request, res: Response) {
-  const credentialId = Number(req.params);
+  const id = Number(req.params.id);
   const { userId } = res.locals;
 
-  await credentialService.getCredentialById(userId, credentialId);
-  await credentialService.deleteCredential(credentialId);
+  await credentialService.getCredentialById(userId, id);
+  await credentialService.deleteCredential(id);
 
   res.status(200).send('Credential deleted');
 }

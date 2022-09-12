@@ -23,21 +23,21 @@ export async function getAllwifis(req: Request, res: Response) {
 }
 
 export async function getWifiById(req: Request, res: Response) {
-  const wifiId = Number(req.params);
+  const id = Number(req.params.id);
   const { userId } = res.locals;
 
-  const wifiList = await wifiService.getWifiById(userId, wifiId);
+  const wifiList = await wifiService.getWifiById(userId, id);
   wifiList.password = encryptUtils.decryptData(wifiList.password);
 
   res.status(200).send(wifiList);
 }
 
 export async function deleteWifi(req: Request, res: Response) {
-  const wifiId = Number(req.params);
+  const id = Number(req.params.id);
   const { userId } = res.locals;
 
-  await wifiService.getWifiById(userId, wifiId);
-  await wifiService.deleteWifi(wifiId);
+  await wifiService.getWifiById(userId, id);
+  await wifiService.deleteWifi(id);
 
   res.status(200).send('wifi info deleted');
 }

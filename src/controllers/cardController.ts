@@ -29,20 +29,20 @@ export async function getAllCards(req: Request, res: Response) {
 }
 
 export async function getCardById(req: Request, res: Response) {
-  const cardId: number = Number(req.params);
+  const id = Number(req.params.id);
   const { userId } = res.locals;
 
-  const cardList = await cardService.getCardById(userId, cardId);
+  const cardList = await cardService.getCardById(userId, id);
 
   res.status(200).send(cardList);
 }
 
 export async function deleteCard(req: Request, res: Response) {
-  const cardId: number = Number(req.params);
+  const id = Number(req.params.id);
   const { userId } = res.locals;
 
-  await cardService.getCardById(userId, cardId);
-  await cardService.deleteCard(cardId);
+  await cardService.getCardById(userId, id);
+  await cardService.deleteCard(id);
 
   res.status(200).send('Card deleted');
 }
