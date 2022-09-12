@@ -15,5 +15,5 @@ export const cardSchema = joi.object({
   expirationDate: joi.string().required(),
   password: joi.string().required(),
   type: joi.string().valid('credit', 'debit', 'hybrid').required(),
-  is_virtual: joi.boolean().required()
+  isVirtual: joi.boolean().required()
 });
