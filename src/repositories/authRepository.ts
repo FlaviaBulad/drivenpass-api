@@ -10,5 +10,5 @@ export async function getByEmail(email: string) {
 }
 
 export async function getUserById(id: number) {
-  return client.users.findFirst({ where: { id } });
+  return client.users.findUnique({ where: { id } });
 }

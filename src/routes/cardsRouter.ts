@@ -8,12 +8,12 @@ const cardsRouter = Router();
 
 cardsRouter.post(
   '/cards/',
-  validateToken(),
+  validateToken,
   validateSchema(cardSchema),
   cardController.createCard
 );
-cardsRouter.get('/cards/', validateToken(), cardController.getAllCards);
-cardsRouter.get('/cards/:id', validateToken(), cardController.getCardById);
-cardsRouter.delete('/cards/:id', validateToken(), cardController.deleteCard);
+cardsRouter.get('/cards/', validateToken, cardController.getAllCards);
+cardsRouter.get('/cards/:id', validateToken, cardController.getCardById);
+cardsRouter.delete('/cards/:id', validateToken, cardController.deleteCard);
 
 export default cardsRouter;

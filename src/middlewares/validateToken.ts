@@ -2,26 +2,37 @@ import { NextFunction, Request, Response } from 'express';
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
 
+import * as authService from '../services/authService';
+
 dotenv.config();
 
-export function validateToken() {
-  return (req: Request, res: Response, next: NextFunction) => {
-    // 1 - get token from headers
-    const token = req.headers.authorization;
+export interface IToken {
+  id: number;
+}
 
-    if (!token) {
-      return res.status(400).send('Token not sent');
+export async function validateToken(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  const token = req.headers.authorization;
+
+  if (!token) {
+    return res.status(400).send('Token not sent');
+  }
+
+  const SECRET: string = process.env.JWT_SECRET ?? '';
+
+  try {
+    const payload = jwt.verify(token, SECRET);
+    const user = await authService.getUserById((payload as IToken).id);
+    if (!user) {
+      throw { type: 'unauthorized', message: 'invalid' };
     }
-
-    const SECRET: string = process.env.JWT_SECRET ?? '';
-
-    try {
-      // 2 - Validate token
-      jwt.verify(token, SECRET);
-      next();
-    } catch (error) {
-      console.log(error);
-      return res.status(401).send('Invalid Token');
-    }
-  };
+    res.locals.userId = Number(user.id);
+    next();
+  } catch (error) {
+    console.log(error);
+    return res.status(401).send('Invalid Token');
+  }
 }

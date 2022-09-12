@@ -6,6 +6,12 @@ import * as authRepository from '../repositories/authRepository';
 
 dotenv.config();
 
+export async function getUserById(id: number) {
+  const user = await authRepository.getUserById(id);
+
+  return user;
+}
+
 export async function validateEmail(email: string) {
   const emailExists = await authRepository.getByEmail(email);
   if (emailExists) {
