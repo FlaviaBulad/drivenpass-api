@@ -12,6 +12,5 @@ authRouter.post(
   validateSchema(registerSchema),
   authController.createUser
 );
-authRouter.delete('/logout');
 
 export default authRouter;
