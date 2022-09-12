@@ -6,9 +6,9 @@ export async function create(authData: AuthData) {
 }
 
 export async function getByEmail(email: string) {
-  return client.users.findUnique({ where: { email } });
+  return client.users.findFirst({ where: { email } });
 }
 
 export async function getUserById(id: number) {
-  return client.users.findUnique({ where: { id } });
+  return client.users.findFirst({ where: { id } });
 }

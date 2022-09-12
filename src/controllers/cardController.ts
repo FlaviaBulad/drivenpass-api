@@ -5,9 +5,9 @@ import * as encryptUtils from '../utils/encryptUtils';
 
 export async function createCard(req: Request, res: Response) {
   const cardData: CardData = req.body;
-  const { userId } = res.locals;
+  const { id } = res.locals;
 
-  const card = await cardService.createCard(userId, cardData);
+  const card = await cardService.createCard(id, cardData);
 
   res.status(201).send(card);
 }
