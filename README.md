@@ -1,7 +1,3 @@
-# projeto19-drivenpass
-
-A Typescript designed mobile app to manage and store confidential information
-
 <p align="center">
   <img  src="https://i.imgur.com/2IAcDT4.gif" width=50%>
 </p>
