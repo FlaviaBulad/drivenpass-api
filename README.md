@@ -33,8 +33,6 @@ DrivenPass is a mobile app that manages users sensitive data like credentials, c
 - Create, fetch and delete data selecting by type;
 - All sensitive data is encrypted.
 
-<br>
-
 # 🚀 Routes
 
 # 💁 Authentication Routes
@@ -49,13 +47,10 @@ Create new users.
   "password": "user_password" //string
 }
 ```
-
 ### Business rules:
 
 - Password must be at least 10 characters long, otherwise the request will end with status code 401 (Unauthorized).
-
 #
-
 ## Route <span style="color:yellow"> **POST** </span>/
 
 Login a registered user.
@@ -66,7 +61,6 @@ Login a registered user.
   "password": "user_password" //string
 }
 ```
-
 ### Business rules:
 
 - Username and password must match.
@@ -75,9 +69,7 @@ Login a registered user.
 - Incorrect password returns 401 (Unauthorized).
 
 ### Successful requests return the JWT token needed for authentication on <span style="color:crimson"> **ALL** </span> routes described below.
-
 #
-
 ### <span style="color:red">All the following routes are authenticated with a JWT token in 'Authorization' format. </span>
 <br>
 
@@ -86,7 +78,6 @@ Login a registered user.
 ## Route <span style="color:yellow"> **POST** </span>/cards
 
 Register credit card data.
-
 ```json
 {
   "title": "register_name", //string
@@ -113,7 +104,6 @@ Register credit card data.
 ## Route <span style="color:green"> **GET** </span>/cards
 
 Fetches all credit card data.
-
 ```json
 [
   {
@@ -143,7 +133,6 @@ Fetches all credit card data.
 ]
 ```
 Note: Sensitive data appears decrypted only at request, it's encrypted in the database.
-
 #
 ## Route <span style="color:green"> **GET** </span>/cards/:id
 
@@ -166,11 +155,8 @@ Fetches data from a specific card through the route by it's id.
 ## Route <span style="color:red"> **DELETE** </span>/cards/:id
 
 Deletes a specific card by it's id.
-
 #
-
 # 💻 Credential Routes
-
 ## Route <span style="color:yellow"> **POST** </span>/credentials
 
 Register website usernames and passwords.
@@ -183,7 +169,6 @@ Register website usernames and passwords.
   "password": "login_password" //string
 }
 ```
-
 ### Business rules:
 
 - Title must be unique for each user.
@@ -372,14 +357,11 @@ Start the server
 
 In this project I learned a lot about how to work with Prisma queries and migrations.
 I also learned about Typescript interfaces and types and how to implement JWT authentication service.
-
 #
-
 ## 👏 Acknowledgements
 
 - [Awesome Badges](https://github.com/Envoy-VC/awesome-badges)
 
 - <p> <a href="https://www.flaticon.com/free-animated-icons/password" title="password animated icons">Password animated icons created by Freepik - Flaticon</a> </p>
-
 #
 
