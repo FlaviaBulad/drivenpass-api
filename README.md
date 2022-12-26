@@ -71,7 +71,6 @@ Login a registered user.
 ### Successful requests return the JWT token needed for authentication on <span style="color:crimson"> **ALL** </span> routes described below.
 #
 ### <span style="color:red">All the following routes are authenticated with a JWT token in 'Authorization' format. </span>
-<br>
 
 # 💳 Card Routes
 
@@ -90,7 +89,6 @@ Register credit card data.
   "type": "card_type" //'credit', 'debit' or 'hybrid'
 }
 ```
-
 ### Business rules:
 
 - Card number and security code accept only numbers, although they are strings, and must be 16 and 3 characters long, respectively.
