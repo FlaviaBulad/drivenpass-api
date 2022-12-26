@@ -1,9 +1,12 @@
 <p align="center">
-  <img  src="https://i.imgur.com/2IAcDT4.gif" width=50%>
+  <img  src="https://i.imgur.com/2IAcDT4.gif" width=40%>
 </p>
 <h1 align="center">
   DrivenPass
 </h1>
+<p align="center">
+   <img src="https://img.shields.io/badge/author-Flávia Bulad-4dae71?style=flat-square"/>
+</p>
 
 <div align="center">
 
@@ -13,39 +16,32 @@
   <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" height="30px"/>
   <img src="https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white" height="30px"/>  
   <img src="https://img.shields.io/badge/Express.js-404D59?style=for-the-badge&logo=express.js&logoColor=white" height="30px"/>
+  <a href="#" target="blank"><img src="https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white" alt="prisma" /></a>
   <!-- Badges source: https://dev.to/envoy_/150-badges-for-github-pnk -->
 
   <h3>Deploy</h3>
 <a href="https://server-drivenpass.herokuapp.com/"><img src='https://img.shields.io/badge/Heroku-430098?style=for-the-badge&logo=heroku&logoColor=white' /></a>
 </div>
 
-<br/>
+# 📋 Description
 
-# Description
-
-DrivenPass is an API for a mobile app that manages users sensitive data like credentials, credit card information, wifi data and other confidential information.
-
-</br>
+DrivenPass is a mobile app that manages users sensitive data like credentials, credit card information, wifi data and other confidential information.
 
 ## Features
 
-- Create an account and login
-- Create, find and delete information selecting by type
-- All sensitive data is encrypted
+- Create an account and login;
+- Create, fetch and delete data selecting by type;
+- All sensitive data is encrypted.
 
-</br>
+<br>
 
-## API Reference
+# 🚀 Routes
 
-</br>
-
-# Authentication Routes
+# 💁 Authentication Routes
 
 ## Route<span style="color:yellow"> **POST** </span>/register
 
-This route is <span style="color:red"> **NOT** </span> authenticated. Your function is to create new users.
-
-The Requisition Body must be in the following format:
+Create new users.
 
 ```json
 {
@@ -56,13 +52,13 @@ The Requisition Body must be in the following format:
 
 ### Business rules:
 
-- The password must be at least 10 characters long, otherwise the request will end with status error 401 (Unauthorized)
+- Password must be at least 10 characters long, otherwise the request will end with status code 401 (Unauthorized).
+
+#
 
 ## Route <span style="color:yellow"> **POST** </span>/
 
-This route is <span style="color:red"> **NOT** </span> authenticated. Your function is to login users.
-
-The Requisition Body must be in the following format:
+Login a registered user.
 
 ```json
 {
@@ -74,23 +70,22 @@ The Requisition Body must be in the following format:
 ### Business rules:
 
 - Username and password must match.
-- Non-existent e-mail returns 404.
-- Incorrect e-mail returns status 409.
-- Incorrect password returns 401.
+- Non-existent e-mail returns status 404 (Not found).
+- Incorrect e-mail returns status 409 (Conflict).
+- Incorrect password returns 401 (Unauthorized).
 
 ### Successful requests return the JWT token needed for authentication on <span style="color:crimson"> **ALL** </span> routes described below.
 
 #
 
-# All the following routes are authenticated with a JWT token in 'Authorization' format.
+### <span style="color:red">All the following routes are authenticated with a JWT token in 'Authorization' format. </span>
+<br>
 
-# Card Routes
+# 💳 Card Routes
 
 ## Route <span style="color:yellow"> **POST** </span>/cards
 
-This route has the function of adding card-related information.
-
-The Body of the request must be made in the following format:
+Register credit card data.
 
 ```json
 {
@@ -111,15 +106,13 @@ The Body of the request must be made in the following format:
 
 - The title is unique to the user in question.
 
-- Repeating the title triggers a status response of 409.
+- Repeating the title triggers a status code of 409 (Conflict).
 
-- The correct request will bring a status response of 201 and the card will be added to the database.
-
+- The correct request will bring a status code of 201 (Created) and the card will be added to the database.
+#
 ## Route <span style="color:green"> **GET** </span>/cards
 
-This route has no information in the body. The intention is to get all the information from all the cards of the user who is the holder of the token in question.
-
-A successful request will bring a response like the one below:
+Fetches all credit card data.
 
 ```json
 [
@@ -149,15 +142,12 @@ A successful request will bring a response like the one below:
   }
 ]
 ```
+Note: Sensitive data appears decrypted only at request, it's encrypted in the database.
 
-Note: Sensitive data appears decrypted only at request. It does not appear that way in the database.
-
+#
 ## Route <span style="color:green"> **GET** </span>/cards/:id
 
-This route passes as information the id of a specific card through the route. The intention is to get the information about this card from the user who owns the token in question.
-
-A successful request will bring a response like the one below:
-
+Fetches data from a specific card through the route by it's id. 
 ```json
 {
   "id": 1,
@@ -172,20 +162,18 @@ A successful request will bring a response like the one below:
   "userId": 1
 }
 ```
-
+#
 ## Route <span style="color:red"> **DELETE** </span>/cards/:id
 
-This route passes as information the id of a specific card through the route. The intent is to delete the information from a data.
+Deletes a specific card by it's id.
 
-A successful request will return a status confirmation and the register will be deleted from database.
+#
 
-# Credential Routes
+# 💻 Credential Routes
 
 ## Route <span style="color:yellow"> **POST** </span>/credentials
 
-The function of this route is to register website usernames and passwords.
-
-The Body of the request should be in the following format:
+Register website usernames and passwords.
 
 ```json
 {
@@ -198,13 +186,12 @@ The Body of the request should be in the following format:
 
 ### Business rules:
 
-- The titles must be unique for each user.
+- Title must be unique for each user.
 
+#
 ## Route <span style="color:green"> **GET** </span>/credentials/:id
 
-This route has no information in the body. It is intended to fetch all credential information from the user holding the token in question.
-
-A successful request will bring a response like the one below:
+Fetches all credential data.
 
 ```json
 [
@@ -226,14 +213,12 @@ A successful request will bring a response like the one below:
   }
 ]
 ```
+Note: Sensitive data appears decrypted only at request, it's encrypted in the database.
 
-Note: Sensitive data appears decrypted only at request. It does not appear that way in the database.
-
+#
 ## Route <span style="color:green"> **GET** </span>/credentials/:id
 
-This route passes as information the id of a specific credential through the route. The intention is to get the credential information from the user that owns the token in question.
-
-A successful request will bring a response like the one below:
+Fetches data from a specific credential by id.
 
 ```json
 {
@@ -245,20 +230,16 @@ A successful request will bring a response like the one below:
   "userId": 1
 }
 ```
-
+#
 ## Route <span style="color:red"> **DELETE** </span>/credentials/:id
 
-This route passes as information the id of a specific credential through the route. The intent is to delete the information from a data.
-
-A successful request will return a status confirmation and the register will be deleted from database.
-
-# Safe Notes Routes
+Deletes a specific credential by id.
+#
+# 🗒️ Safe Notes Routes
 
 ## Route <span style="color:yellow"> **POST** </span>/safeNotes
 
-The function of this route is to perform the addition of annotations.
-
-The Body of the request should be in the following format:
+Register notes.
 
 ```json
 {
@@ -266,18 +247,13 @@ The Body of the request should be in the following format:
   "note": "your_text" //string
 }
 ```
-
 ### Business rules:
 
-- The title must have a maximum of 50 characters, and the note 1000.
-
-- The correct request will bring a status 201 response and the note will be added to the database.
+- Title must have a maximum of 50 characters, and the note 1000.
 
 ## Route <span style="color:green"> **GET** </span>/safeNotes
 
-This route has no information in the body. The intention is to get all the information from all the notes of the user holding the token in question.
-
-A successful request will bring a response like the one below:
+Fetches all notes.
 
 ```json
 [
@@ -295,12 +271,11 @@ A successful request will bring a response like the one below:
   }
 ]
 ```
-
-Note: Sensitive data appears decrypted only at request. It does not appear that way in the database.
+Note: Sensitive data appears decrypted only at request, it's encrypted in the database.
 
 ## Route <span style="color:green"> **GET** </span>/safeNotes/:id
 
-This route passes as information the id of a specific token through the route. The intention is to get the information about this note from the token holder user in question.
+This route fetches a specific note by id.
 
 A successful request will bring a response like the one below:
 
@@ -315,17 +290,14 @@ A successful request will bring a response like the one below:
 
 ## Route <span style="color:red"> **DELETE** </span>/safeNotes/:id
 
-This route passes as information the id of a specific note through the route. The intent is to delete the information from a piece of data.
-
-A successful request will return a status confirmation and the register will be deleted from database.
-
-# Wifi Routes
-
+Deletes a specific note by id.
+#
+# 🌐 Wifi Routes
 ## Route <span style="color:yellow"> **POST** </span>/wifi
 
-This route has the function of adding wifi network information.
+This route register wifi data.
 
-The Body of the request should be in the following format:
+The request body should be in the following format:
 
 ```json
 {
@@ -337,10 +309,7 @@ The Body of the request should be in the following format:
 
 ## Route <span style="color:green"> **GET** </span>/wifi
 
-This route has no information in the body. The intention is to get all information from all wifi networks of the token holder user in question.
-
-A successful request will bring a response like the one below:
-
+Fetches all wifi registered.
 ```json
 [
   {
@@ -359,15 +328,11 @@ A successful request will bring a response like the one below:
   }
 ]
 ```
-
-Note: Sensitive data appears decrypted only at request. It does not appear that way in the database.
-
+Note: Sensitive data appears decrypted only at request, it's encrypted in the database.
+#
 ## Route <span style="color:green"> **GET** </span>/wifi/:id
 
-This route passes as information the id of a specific wifi through the route. The intention is to get the information of this wifi from the token holder user in question.
-
-A successful request will bring a response like the one below:
-
+Fetches a specific wifi register by id.
 ```json
 {
   "id": 1,
@@ -377,19 +342,17 @@ A successful request will bring a response like the one below:
   "userId": 1
 }
 ```
-
+#
 ## Route <span style="color:red"> **DELETE** </span>/wifi/:id
 
-This route passes as information the id of a specific wifi through the route. The intention is to delete the information from a datum.
-
-A successful request will return a status confirmation and the register will be deleted from database.
-
-# Run Locally
+Deletes a specific wifi register by id.
+#
+# 🏁 Running the App
 
 Clone the project
 
 ```bash
-  git clone https://github.com/FlaviaBulad/projeto19-drivenpass-back
+  git clone https://github.com/FlaviaBulad/drivenpass-api
 ```
 
 Install dependencies
@@ -403,27 +366,20 @@ Start the server
 ```bash
   npm run dev
 ```
+#
 
-</br>
-
-## Lessons Learned
+## 📖 Lessons Learned
 
 In this project I learned a lot about how to work with Prisma queries and migrations.
-I also learned about Typescript interfaces and types and how to use JWT authentication service.
+I also learned about Typescript interfaces and types and how to implement JWT authentication service.
 
-</br>
+#
 
-## Acknowledgements
+## 👏 Acknowledgements
 
 - [Awesome Badges](https://github.com/Envoy-VC/awesome-badges)
 
-- <p> <a href="https://www.flaticon.com/free-animated-icons/password" title="password animated icons">Password animated icons created by Freepik - Flaticon</a></p>
-
-</br>
-
-## Authors
-
-- Flávia Bulad is a student at Driven Education and is putting effort into it to become a FullStack Web Developer.
-  <br/>
+- <p> <a href="https://www.flaticon.com/free-animated-icons/password" title="password animated icons">Password animated icons created by Freepik - Flaticon</a> </p>
 
 #
+
